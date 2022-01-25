@@ -1,85 +1,88 @@
-/*
- * @CopyRight:
- * FISCO-BCOS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+/**
+ *  Copyright (C) 2021 FISCO BCOS.
+ *  SPDX-License-Identifier: Apache-2.0
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- * FISCO-BCOS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * You should have received a copy of the GNU General Public License
- * along with FISCO-BCOS.  If not, see <http://www.gnu.org/licenses/>
- * (c) 2016-2018 fisco-dev contributors.
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ * @brief Initializer for all the modules
+ * @file Initializer.h
+ * @author: yujiechen
+ * @date 2021-06-11
  */
-/** @file Initializer.h
- *  @author chaychen
- *  @modify first draft
- *  @date 20181022
- */
-
 #pragma once
-
-#include "Common.h"
-#include "InitializerInterface.h"
-#include "KeyCenterInitializer.h"
+#include "FrontServiceInitializer.h"
 #include "LedgerInitializer.h"
-#ifndef FISCO_EASYLOG
-#include "BoostLogInitializer.h"
-#else
-#include "EasyLogInitializer.h"
-#endif
-#include "P2PInitializer.h"
-#include "RPCInitializer.h"
-#include "SecureInitializer.h"
+#include "PBFTInitializer.h"
+#include "ProtocolInitializer.h"
+#include "SchedulerInitializer.h"
+#include "StorageInitializer.h"
+#include "TxPoolInitializer.h"
+#include <bcos-framework/interfaces/gateway/GatewayInterface.h>
+#include <bcos-framework/interfaces/rpc/RPCInterface.h>
+#include <bcos-framework/libutilities/BoostLogInitializer.h>
+#include <memory>
 
-namespace dev
+namespace bcos::initializer
 {
-namespace initializer
-{
-class Initializer : public InitializerInterface, public std::enable_shared_from_this<Initializer>
+class Initializer
 {
 public:
-    typedef std::shared_ptr<Initializer> Ptr;
+    using Ptr = std::shared_ptr<Initializer>;
+    Initializer() = default;
+    virtual ~Initializer() { stop(); }
 
-    virtual ~Initializer()
+
+    virtual void start();
+    virtual void stop();
+
+    bcos::tool::NodeConfig::Ptr nodeConfig() { return m_nodeConfig; }
+    ProtocolInitializer::Ptr protocolInitializer() { return m_protocolInitializer; }
+    PBFTInitializer::Ptr pbftInitializer() { return m_pbftInitializer; }
+    TxPoolInitializer::Ptr txPoolInitializer() { return m_txpoolInitializer; }
+
+    bcos::ledger::LedgerInterface::Ptr ledger() { return m_ledger; }
+    bcos::scheduler::SchedulerInterface::Ptr scheduler() { return m_scheduler; }
+
+    FrontServiceInitializer::Ptr frontService() { return m_frontServiceInitializer; }
+
+    void initLocalNode(std::string const& _configFilePath, std::string const& _genesisFile,
+        bcos::gateway::GatewayInterface::Ptr _gateway)
     {
-        /// modify the destructure order to ensure that the log is destructed at last
-        /// stop the ledger
-        if (m_ledgerInitializer)
-        {
-            m_ledgerInitializer->stopAll();
-        }
-        /// stop rpc
-        if (m_rpcInitializer)
-        {
-            m_rpcInitializer->stop();
-        }
-        /// stop p2p
-        if (m_p2pInitializer)
-        {
-            m_p2pInitializer->stop();
-        }
+        initConfig(_configFilePath, _genesisFile, "", true);
+        init(bcos::initializer::NodeArchitectureType::AIR, _configFilePath, _genesisFile, _gateway,
+            true);
     }
-    void init(std::string const& _path);
+    void initMicroServiceNode(std::string const& _configFilePath, std::string const& _genesisFile,
+        std::string const& _privateKeyPath);
 
-    SecureInitializer::Ptr secureInitializer() { return m_secureInitializer; }
-    P2PInitializer::Ptr p2pInitializer() { return m_p2pInitializer; }
-    LedgerInitializer::Ptr ledgerInitializer() { return m_ledgerInitializer; }
-    RPCInitializer::Ptr rpcInitializer() { return m_rpcInitializer; }
-    LogInitializer::Ptr logInitializer() { return m_logInitializer; }
+protected:
+    virtual void init(bcos::initializer::NodeArchitectureType _nodeArchType,
+        std::string const& _configFilePath, std::string const& _genesisFile,
+        bcos::gateway::GatewayInterface::Ptr _gateway, bool _localMode);
+
+    virtual void initConfig(std::string const& _configFilePath, std::string const& _genesisFile,
+        std::string const& _privateKeyPath, bool _localMode);
+
+    void initSysContract();
 
 private:
-    LogInitializer::Ptr m_logInitializer;
-    RPCInitializer::Ptr m_rpcInitializer;
-    LedgerInitializer::Ptr m_ledgerInitializer;
-    P2PInitializer::Ptr m_p2pInitializer;
+    bcos::tool::NodeConfig::Ptr m_nodeConfig;
+    ProtocolInitializer::Ptr m_protocolInitializer;
+    FrontServiceInitializer::Ptr m_frontServiceInitializer;
+    TxPoolInitializer::Ptr m_txpoolInitializer;
 
-    SecureInitializer::Ptr m_secureInitializer;
+    PBFTInitializer::Ptr m_pbftInitializer;
+
+    bcos::ledger::LedgerInterface::Ptr m_ledger;
+    bcos::scheduler::SchedulerInterface::Ptr m_scheduler;
 };
-
-}  // namespace initializer
-
-}  // namespace dev
+}  // namespace bcos::initializer

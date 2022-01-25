@@ -1,64 +1,59 @@
-English / [中文](docs/README_CN.md)
+中文 / [English](docs/README_EN.md)
 
-![](docs/images/FISCO_BCOS_Logo.svg)
+![](./docs/FISCO_BCOS_Logo.svg)
 
-**FISCO BCOS** officially launched in December 2017, is the first China-developed open source consortium blockchain platform. It was collaboratively built by the FISCO open source working group, which was formed by Beyondsoft, Huawei, Shenzhen Securities Communications, Digital China, Forms Syntron, Tencent, WeBank, YIBI Technology, Yuexiu Financial Holdings (Fintech) and more.
+[![codecov](https://codecov.io/gh/FISCO-BCOS/FISCO-BCOS/branch/master/graph/badge.svg)](https://codecov.io/gh/FISCO-BCOS/FISCO-BCOS)
+[![CodeFactor](https://www.codefactor.io/repository/github/fisco-bcos/FISCO-BCOS/badge)](https://www.codefactor.io/repository/github/fisco-bcos/FISCO-BCOS)
+[![GitHub All Releases](https://img.shields.io/github/downloads/FISCO-BCOS/FISCO-BCOS/total.svg)](https://github.com/FISCO-BCOS/FISCO-BCOS)
 
-Aiming for business adaptability, performance, security, technical applicability, O&M and costs, FISCO BCOS opted for a consortium chain architecture that has achieved over 10,000 TPS of single-chain performance and massive storage capability. It supports both PBFT and Raft algorithms for block consensus. It provides portable tools to allow developers to configure and deploy new FISCO BCOS instances in seconds. Applications can be easily developed based on smart contracts and case templates; business security and privacy is guaranteed by access control, cryptography, privacy protection, and other sophisticated technologies.
+FISCO BCOS是由微众牵头的金链盟主导研发、对外开源、安全可控的企业级金融区块链底层技术平台。
+单链配置下，性能TPS可达万级。提供群组架构、并行计算、分布式存储、可插拔的共识机制、隐私保护算法、支持全链路国密算法等诸多特性。
+经过多个机构、多个应用，长时间在生产环境中的实践检验，具备金融级的高性能、高可用性及高安全性。
 
-FISCO BCOS is a reliable, secure, efficient and portable blockchain platform with proven success from many partners and successful financial-grade applications. Till now, hundreds and thousands of companies, institutions and individual contributors have launched their own applications based on FISCO BCOS, covering application scenarios including government affairs, finance, charity, health care, education, transport, copyright, product tracing, supply chain, recruitment, agriculture, social communication, and entertainment.
+FISCO BCOS 3.0全新升级，新增多个核心特性，主要如下：
 
-[![codecov](https://codecov.io/gh/FISCO-BCOS/FISCO-BCOS/branch/master/graph/badge.svg)](https://codecov.io/gh/FISCO-BCOS/FISCO-BCOS) [![CodeFactor](https://www.codefactor.io/repository/github/fisco-bcos/FISCO-BCOS/badge)](https://www.codefactor.io/repository/github/fisco-bcos/FISCO-BCOS) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/08552871ee104fe299b00bc79f8a12b9)](https://www.codacy.com/app/fisco-dev/FISCO-BCOS?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=FISCO-BCOS/FISCO-BCOS&amp;utm_campaign=Badge_Grade) [![GitHub All Releases](https://img.shields.io/github/downloads/FISCO-BCOS/FISCO-BCOS/total.svg)](https://github.com/FISCO-BCOS/FISCO-BCOS) [![Code Lines](https://tokei.rs/b1/github/FISCO-BCOS/FISCO-BCOS?category=code)](https://github.com/FISCO-BCOS/FISCO-BCOS)
+- **微服务架构**：微服务模块化设计架构，支持计算、存储、网络独立可平行扩展。
 
-[![CircleCI](https://circleci.com/gh/FISCO-BCOS/FISCO-BCOS.svg?style=shield)](https://circleci.com/gh/FISCO-BCOS/FISCO-BCOS)  [![Build Status](https://travis-ci.org/FISCO-BCOS/FISCO-BCOS.svg)](https://travis-ci.org/FISCO-BCOS/FISCO-BCOS)
+- **确定性多合约并行算法**：用户无感的智能并行调度引擎，可以实现合约级的并行，大幅提升交易吞吐量。
+
+- **流水线PBFT共识机制**：对PBFT全新升级改版，实现区块打包、验证、共识的流水线服务，显著提升系统效率。
+
+- **集成WeBankBlockchain Liquid和WASM虚拟机**：支持Solidity的同时，新增支持WeBankBlockchain Liquid合约，合约功能更强大。
+
+- **区块链文件系统**：支持“所见即所得”的区块链资源管理方式，对区块链的合约与数据治理更友好。
+
+- **多场景适配的产品家族**：支持构建不同形态的服务模式，包括“轻便Air版本”、“专业Pro版”和“大容量Max版”，满足多样化的场景需求。
+
+## 技术文档
+
+- **[FISCO BCOS 3.x技术文档（rc1）](https://fisco-bcos-doc.readthedocs.io/zh_CN/latest/)**
+
+- **[FISCO BCOS 2.x 技术文档（stable）](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/)**
 
 
-## Technical documentation
+## 落地应用案例
 
-- [**中文**](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/)
+FISCO BCOS已落地应用达数百个，场景覆盖政务、金融、公益、医疗、教育、交通、版权、商品溯源、供应链、招聘、农业、社交、游戏等多个领域，如：
 
+- 金融业：机构间对账、供应链金融、旅游金融等。
+- 司法服务：仲裁链、电子借据等。
+- 文化版权：版权存证与交易等。
+- 社会管理：不动产登记等。
 
-## Key features
+此处提供一些具有代表性的[落地应用案例](https://mp.weixin.qq.com/s/RJwRMChWt6mhJrysyBLAmA)。
 
-**Security**: all-rounded security protection, access control, CA authentication and key management, etc.
+## 贡献代码
 
-**Privacy**: permission control, OSCCA algorithm, homomorphic encryption, zero-knowledge proof, ring signature, group signature, etc.
+- 我们欢迎并非常感谢您的贡献，请参阅[代码贡献流程](https://mp.weixin.qq.com/s/_w_auH8X4SQQWO3lhfNrbQ)。
 
-**Performance**: scalable group architecture, distributed storage, precompiled contract, DAG parallel execution, efficient parallel PBFT consensus, handling over 10,000 TPS on a single chain.
+- 如项目对您有帮助，欢迎star支持！
 
-**Portability**: quick-start development, debugging, deployment, operation, monitoring and auditing.
+## 加入我们的社区
 
-**Reliability**: precipitation of long-time implementations in production environment of many application cases from partners.
+**FISCO BCOS开源社区**是国内活跃的开源社区，社区长期为机构和个人开发者提供各类支持与帮助。已有来自各行业的数千名技术爱好者在研究和使用FISCO BCOS。如您对FISCO BCOS开源技术及应用感兴趣，欢迎加入社区获得更多支持与帮助。
 
-## Featured applications
-
-**FISCO BCOS** has been adopted in over 10 applications in areas like government affair, finances, charity, health care, education, transport, copyright, product tracing, supply chain, recruitment, agriculture, social communication, and entertainment. 
-
-- Finance: inter-institutional reconciliation, supply chain finance, tourism finance, etc.
-- Judicial services: arbitration chain, digital IOUs, etc.
-- Copyright: copyright registration and trading, etc.
-- Social management: real-estate registration, etc.
-
-Featured use cases are provided [here](http://www.fisco-bcos.org/assets/docs/FISCO%20BCOS%20-%20Featured%20Cases.pdf).
-
-## Community
-
-FISCO BCOS Open Source Community is one of the most active blockchain open-source communities in China. Its technical projects cover a wide technical spectrum including platform infrastructure, user clients, management console, browser, key security, OSCCA support, privacy protection and application cases.
-
-Our community has attracted thousands of contributors and followers from hundreds of enterprises both domestically and internationally. Research and business development teams from different industry sectors, as well as academies including universities and research institutions, jointly provide the community with all kinds of supports: online community, off-line events, lectures, project technical support, developer competitions and industrial-grade incubation.
-
-## Code contribution
-
-- Star our project.
-- Submit pull requests. Here are code [contribution](https://mp.weixin.qq.com/s/hEn2rxqnqp0dF6OKH6Ua-A) and [coding standards](CODING_STYLE.md).
-- Submit your [questions and bugs](https://github.com/FISCO-BCOS/FISCO-BCOS/issues).
-- Join our WeChat group for insightful discussion. [WeChat](https://github.com/FISCO-BCOS/FISCO-BCOS-DOC/blob/release-2.0/images/community/WeChatQR.jpg) or [Gitter](https://gitter.im/fisco-bcos/Lobby).
-- Highly welcomed to [report security issues](https://security.webank.com)!
-
-![](https://media.githubusercontent.com/media/FISCO-BCOS/LargeFiles/master/images/QR_image_en.png)
+![](https://raw.githubusercontent.com/FISCO-BCOS/LargeFiles/master/images/QR_image.png)
 
 ## License
 
-[![](https://img.shields.io/github/license/FISCO-BCOS/FISCO-BCOS.svg)](LICENSE)
-
-All contributions are made under the [GNU General Public License v3](https://www.gnu.org/licenses/gpl-3.0.en.html). See [LICENSE](LICENSE).
+FISCO BCOS的开源协议为Apache License 2.0, 详情参见[LICENSE](LICENSE)。
